@@ -48,6 +48,12 @@ public:
         portEXIT_CRITICAL(&timerMux);
     }
 
+    bool compareDistance(float milimetros)
+    {
+        uint32_t distance = round((milimetros*pulsosPorMm));
+        return getCounter() == distance;
+    }
+
 private:
     uint32_t ppr = 2000;                 // pulsos por rotação
     uint32_t diametroDaPolia = 60;       // mm
