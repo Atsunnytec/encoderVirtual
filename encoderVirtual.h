@@ -18,6 +18,7 @@ class encoderVirtual
 public:
     encoderVirtual(uint32_t _ppr, uint32_t _diametroDaPolia) : ppr{_ppr}, diametroDaPolia{_diametroDaPolia}
     {
+        calculos();
         configureTimer();
     }
 
@@ -27,6 +28,7 @@ public:
         Serial.print("mm/s:");
         Serial.println(velocidade_mmPorSegundo);
         calculos();
+        changeAlarmTimeout(usPorPulso);
     }
 
     float getPulsosPorSegundo()
@@ -77,8 +79,13 @@ private:
     {
         timer = timerBegin(0, prescaler, true);
         timerAttachInterrupt(timer, onTimer, true);
-        timerAlarmWrite(timer, usPorPulso, true);
+        changeAlarmTimeout(usPorPulso);
         timerAlarmEnable(timer);
+    }
+
+    void changeAlarmTimeout(float value)
+    {
+        timerAlarmWrite(timer, round(value), true);
     }
 };
 
