@@ -40,8 +40,6 @@ public:
         changeAlarmTimeout(usPorPulso);
     }
 
-
-
     float getPulsosPorSegundo()
     {
         return pulsosPorSegundo;
@@ -72,9 +70,9 @@ private:
     uint32_t ppr = 2000;                 // pulsos por rotação
     uint32_t diametroDaPolia = 60;       // mm
     float velocidade_mmPorSegundo = 200; //mm/s
-    float pulsosPorMm = ppr / ((float)diametroDaPolia * 3.14159);
-    float pulsosPorSegundo = pulsosPorMm * velocidade_mmPorSegundo;
-    uint32_t ticksPorUs = freqDoESP32 / prescaler;
+    float pulsosPorMm = 10.61;
+    float pulsosPorSegundo = 848.83;
+    uint32_t ticksPorUs = 10;
 
     float usPorPulso = 471;
 
