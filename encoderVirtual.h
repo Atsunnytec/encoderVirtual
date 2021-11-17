@@ -31,6 +31,17 @@ public:
         changeAlarmTimeout(usPorPulso);
     }
 
+    void setVelocidade_milimetrosPorSegundo(uint32_t _velocidade)
+    {
+        velocidade_mmPorSegundo = _velocidade;
+        Serial.print("mm/s:");
+        Serial.println(velocidade_mmPorSegundo);
+        calculos();
+        changeAlarmTimeout(usPorPulso);
+    }
+
+
+
     float getPulsosPorSegundo()
     {
         return pulsosPorSegundo;
