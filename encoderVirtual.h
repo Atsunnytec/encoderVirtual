@@ -50,28 +50,31 @@ public:
 
     bool compareDistance(float milimetros)
     {
-        uint32_t distance = round((milimetros*pulsosPorMm));
+        uint32_t distance = round((milimetros * pulsosPorMm));
         return getCounter() == distance;
     }
 
 private:
+    const int16_t prescaler = 8;     // !=0
+    const uint32_t freqDoESP32 = 80; // MHz
+
     uint32_t ppr = 2000;                 // pulsos por rotação
     uint32_t diametroDaPolia = 60;       // mm
     float velocidade_mmPorSegundo = 200; //mm/s
     float pulsosPorMm = ppr / ((float)diametroDaPolia * 3.14159);
     float pulsosPorSegundo = pulsosPorMm * velocidade_mmPorSegundo;
+    uint32_t ticksPorUs = freqDoESP32 / prescaler;
 
-    uint32_t usPorPulso = 471;
+    float usPorPulso = 471;
 
     hw_timer_t *timer = NULL;
-
-    const int16_t prescaler = 80;
 
     void calculos()
     {
         pulsosPorMm = ppr / ((float)diametroDaPolia * 3.14159);
-        pulsosPorSegundo = pulsosPorMm * velocidade_mmPorSegundo;
-        usPorPulso = round((float)1000000 / pulsosPorSegundo);
+        pulsosPorSegundo = (float)pulsosPorMm * velocidade_mmPorSegundo;
+        usPorPulso = (float)1000000 / pulsosPorSegundo;
+        ticksPorUs = freqDoESP32 / prescaler;
 
         Serial.print("us/p:");
         Serial.println(usPorPulso);
@@ -89,9 +92,9 @@ private:
         timerAlarmEnable(timer);
     }
 
-    void changeAlarmTimeout(float value)
+    void changeAlarmTimeout(float valueInUs)
     {
-        timerAlarmWrite(timer, round(value), true);
+        timerAlarmWrite(timer, round(ticksPorUs * valueInUs), true);
     }
 };
 
