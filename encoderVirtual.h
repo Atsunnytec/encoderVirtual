@@ -22,18 +22,18 @@ public:
         configureTimer();
     }
 
-    void setVelocidade_metrosPorMinuto(uint32_t _velocidade)
+    void setVelocidade_metrosPorMinuto(uint32_t _metrosPorMinuto)
     {
-        velocidade_mmPorSegundo = _velocidade * 1000 / 60;
+        velocidade_mmPorSegundo = _metrosPorMinuto * 1000 / 60;
         Serial.print("mm/s:");
         Serial.println(velocidade_mmPorSegundo);
         calculos();
         changeAlarmTimeout(usPorPulso);
     }
 
-    void setVelocidade_milimetrosPorSegundo(uint32_t _velocidade)
+    void setVelocidade(uint32_t _mmPorSegundo)
     {
-        velocidade_mmPorSegundo = _velocidade;
+        velocidade_mmPorSegundo = _mmPorSegundo;
         Serial.print("mm/s:");
         Serial.println(velocidade_mmPorSegundo);
         calculos();
