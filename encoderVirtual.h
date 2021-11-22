@@ -18,6 +18,8 @@ public:
     uint32_t getCounter();
     void setCounter(uint32_t value);
     bool compareDistance(float milimetros);
+    // to do: pause()
+    // to do: resume()
 
 private:
     const int16_t prescaler = 8;     // !=0
