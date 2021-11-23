@@ -38,6 +38,11 @@ uint32_t encoderVirtual::getCounter()
     return interruptCounter;
 }
 
+float encoderVirtual::getPosition()
+{
+    return interruptCounter / pulsosPorMm;
+}
+
 void encoderVirtual::setCounter(uint32_t value)
 {
     portENTER_CRITICAL(&timerMux);

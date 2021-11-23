@@ -16,6 +16,7 @@ public:
     void setVelocidade(uint32_t _mmPorSegundo);
     float getPulsosPorSegundo();
     uint32_t getCounter();
+    float getPosition();
     void setCounter(uint32_t value);
     bool compareDistance(float milimetros);
     // to do: pause()
