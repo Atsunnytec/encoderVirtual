@@ -52,8 +52,8 @@ void encoderVirtual::setCounter(uint32_t value)
 
 bool encoderVirtual::compareDistance(float milimetros)
 {
-    uint32_t distance = round((milimetros * pulsosPorMm));
-    return getCounter() == distance;
+    uint32_t distanceInPulses = round((milimetros * pulsosPorMm));
+    return getCounter() == distanceInPulses;
 }
 
 void encoderVirtual::calculos()
