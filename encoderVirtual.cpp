@@ -50,6 +50,7 @@ void encoderVirtual::setCounter(uint32_t value)
     portEXIT_CRITICAL(&timerMux);
 }
 
+// to do: compareDistance que responde "maior ou igual"
 bool encoderVirtual::compareDistance(float milimetros)
 {
     uint32_t distanceInPulses = round((milimetros * pulsosPorMm));
